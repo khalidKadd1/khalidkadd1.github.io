@@ -119,6 +119,8 @@ section { padding: clamp(56px, 8vw, 96px) 0 0; }
 .specs td b { color: var(--accent); font-weight: 500; }
 .note { font-size: 13.5px; color: var(--muted); margin: 12px 0 0; max-width: 60ch; }
 .stack { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px; }
+.gh { display: inline-flex; gap: 6px; margin-top: 16px; font-family: var(--mono); font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--accent); text-decoration: none; border-bottom: 1.5px solid currentColor; padding-bottom: 2px; }
+.gh:hover { color: var(--ink); }
 .chip { font-family: var(--mono); font-size: 12px; padding: 3px 8px; border: 1px solid var(--line); background: var(--panel); }
 
 .media { display: grid; gap: 14px; align-content: start; }
@@ -212,6 +214,7 @@ figcaption b { color: var(--ink); font-weight: 500; }
       <a href="#experience">Experience</a>
       <a href="#skills">Skills</a>
       <a href="#contact">Contact</a>
+      <a href="https://github.com/khalidKadd1">GitHub</a>
     </nav>
   </div>
 </header>
@@ -321,6 +324,7 @@ figcaption b { color: var(--ink); font-weight: 500; }
           <tr><th>Arm / pendulum mass</th><td>0.12 kg / 0.15 kg</td></tr>
         </table>
         <div class="stack"><span class="chip">MATLAB</span><span class="chip">Simulink</span><span class="chip">Simscape Multibody</span><span class="chip">LQR</span><span class="chip">Lyapunov</span></div>
+        <a class="gh" href="https://github.com/khalidKadd1/Underactuated-Furuta-Pendulum-Control">View code and files on GitHub <span aria-hidden="true">→</span></a>
       </div>
       <div class="media two">
         <figure class="span2 sim"><div class="frame" style="background:#000"><video src="media/furuta-full.mp4" autoplay muted loop playsinline aria-label="Full Simscape simulation: the pendulum swings up from hanging down, is stabilized upright by the LQR, then recovers from applied disturbances"></video></div><figcaption><b>Full run</b> · energy swing-up, switch to LQR, stabilization. Once upright, disturbances are applied to test whether the LQR can counteract them and bring the pendulum back.</figcaption></figure>
@@ -344,7 +348,7 @@ figcaption b { color: var(--ink); font-weight: 500; }
         <ul class="did">
           <li>Deployed a YOLOv8 nano detector on a Raspberry Pi 5 with a Pi Camera V2 to find bottles and cans in real time.</li>
           <li>Responsible for actuation and sensing: the DC drive motors through the L298N driver, the arm's servos on the ESP32, and the Pi Camera V2.</li>
-          <li>Implemented the Mamdani fuzzy controller that turns object offset and distance into left and right motor speeds, designed in MATLAB and ported to Python with scikit-fuzzy.</li>
+          <li>Implemented the Mamdani fuzzy controller that turns object offset and distance into left and right motor speeds, designed in MATLAB and ported to Python on the Pi.</li>
           <li>Developed the webcam gesture control: MediaPipe hand landmarks become a five-finger code, mapped to 13 arm commands and sent to the ESP32 over WebSocket.</li>
         </ul>
         <p class="label">Key numbers</p>
@@ -356,6 +360,7 @@ figcaption b { color: var(--ink); font-weight: 500; }
           <tr><th>Gesture commands</th><td>13, covering 6 joints</td></tr>
         </table>
         <div class="stack"><span class="chip">YOLOv8</span><span class="chip">Raspberry Pi 5</span><span class="chip">ESP32</span><span class="chip">Fuzzy logic</span><span class="chip">OpenCV · MediaPipe</span></div>
+        <a class="gh" href="https://github.com/khalidKadd1/Autonomous-Garbage-Collecter">View code and files on GitHub <span aria-hidden="true">→</span></a>
       </div>
       <div class="media two">
         <figure><div class="frame"><video src="media/rover-arm.mp4" autoplay muted loop playsinline aria-label="The rover's arm reaching for a water bottle"></video></div><figcaption><b>Arm</b> · gesture-driven pick</figcaption></figure>
@@ -390,6 +395,7 @@ figcaption b { color: var(--ink); font-weight: 500; }
         </table>
         <p class="note">Results use a stratified random split. Patient-wise splits were tested but left too few positive events to learn from.</p>
         <div class="stack"><span class="chip">Python</span><span class="chip">TensorFlow / Keras</span><span class="chip">CNN–BiLSTM</span><span class="chip">GAN</span></div>
+        <a class="gh" href="https://github.com/khalidKadd1/hypoglycemia-detection-cnn-bilstm-gans">View code and files on GitHub <span aria-hidden="true">→</span></a>
       </div>
       <div class="media">
         <figure><div class="frame white"><img src="media/dl-poster.jpg" alt="Project poster summarizing the dataset, method and results"></div><figcaption><b>Poster</b> · method and results</figcaption></figure>
@@ -430,6 +436,7 @@ figcaption b { color: var(--ink); font-weight: 500; }
           <tr><th>Hopper volume</th><td>0.25 m³</td></tr>
         </table>
         <div class="stack"><span class="chip">SolidWorks</span><span class="chip">FEA</span><span class="chip">Shigley methods</span></div>
+        <a class="gh" href="https://github.com/khalidKadd1/Waste-Sorting-Conveyor-Belt-System-Design-SolidWorks-">View code and files on GitHub <span aria-hidden="true">→</span></a>
       </div>
       <div class="media two">
         <figure class="span2"><div class="frame white"><img src="media/conveyor-render.jpg" alt="SolidWorks model of the hopper, conveyor belt and three sorting bins" style="max-height:440px;margin:0 auto"></div><figcaption><b>Assembly</b> · hopper, belt, pushers and bins</figcaption></figure>
@@ -463,6 +470,7 @@ figcaption b { color: var(--ink); font-weight: 500; }
           <tr><th>V-bracket FEA</th><td><b>min FoS 3.87</b>, 64.2 MPa peak</td></tr>
         </table>
         <div class="stack"><span class="chip">SolidWorks</span><span class="chip">Motion Analysis</span><span class="chip">Simulation</span><span class="chip">Sustainability</span><span class="chip">Visualize</span></div>
+        <a class="gh" href="https://github.com/khalidKadd1/px4-drone-cad">View code and files on GitHub <span aria-hidden="true">→</span></a>
       </div>
       <div class="media two">
         <figure class="span2"><div class="frame"><img src="media/drone-render.jpg" alt="Rendered PX4 drone on a dark plinth"></div><figcaption><b>Render</b> · full assembly</figcaption></figure>
@@ -496,6 +504,7 @@ figcaption b { color: var(--ink); font-weight: 500; }
           <tr><th>Sensing</th><td>Ultrasonic sensor, DS18B20 probe</td></tr>
         </table>
         <div class="stack"><span class="chip">Arduino</span><span class="chip">C++</span><span class="chip">Relays</span><span class="chip">L298N</span></div>
+        <a class="gh" href="https://github.com/khalidKadd1/automated-liquid-dispenser">View code and files on GitHub <span aria-hidden="true">→</span></a>
       </div>
       <div class="media two">
         <figure><div class="frame"><video src="media/dispenser.mp4" autoplay muted loop playsinline aria-label="The dispenser moving a cup and filling it"></video></div><figcaption><b>In action</b> · cup positioning and filling</figcaption></figure>
@@ -593,6 +602,7 @@ figcaption b { color: var(--ink); font-weight: 500; }
     <dl>
       <div><dt>Email</dt><dd><a href="mailto:khalid.kaddoura.01@gmail.com">khalid.kaddoura.01@gmail.com</a></dd></div>
       <div><dt>Phone</dt><dd>+961 81 473 743</dd></div>
+      <div><dt>GitHub</dt><dd><a href="https://github.com/khalidKadd1">github.com/khalidKadd1</a></dd></div>
       <div><dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/khalid-kaddoura">linkedin.com/in/khalid-kaddoura</a></dd></div>
       <div><dt>Languages</dt><dd>Arabic (C2, native) · English (C1)</dd></div>
     </dl>
