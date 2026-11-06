@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Khalid Kaddoura Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout idea: the portfolio as an engineering drawing set. Each project is a numbered sheet with a title block, a spec table and its evidence. */
+  --paper: #eef0ec;
+  --panel: #f9faf7;
+  --ink: #15191e;
+  --muted: #59626c;
+  --line: #c6ccc5;
+  --accent: #d9501a;
+  --accent-soft: #f6dccf;
+  --mine: #d9501a;
+  --team: #6b7783;
+  --display: "Barlow Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #101316; --panel: #171b1f; --ink: #e6e9e5; --muted: #98a2ab; --line: #2b3238;
+    --accent: #ff7a3f; --accent-soft: #3a2218; --mine: #ff7a3f; --team: #8d98a3; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #101316; --panel: #171b1f; --ink: #e6e9e5; --muted: #98a2ab; --line: #2b3238;
+  --accent: #ff7a3f; --accent-soft: #3a2218; --mine: #ff7a3f; --team: #8d98a3; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 16.5px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+img, video { max-width: 100%; display: block; }
+a { color: inherit; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 700; letter-spacing: .01em; text-wrap: balance; margin: 0; line-height: 1; }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); }
+.mono { font-family: var(--mono); }
+
+/* top bar */
+.bar { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--paper) 92%, transparent); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
+.bar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 56px; }
+.mark { font-family: var(--display); font-weight: 700; font-size: 22px; text-decoration: none; letter-spacing: .04em; }
+.mark span { color: var(--accent); }
+.bar nav { display: flex; gap: clamp(12px, 3vw, 28px); font-family: var(--mono); font-size: 13px; text-transform: uppercase; letter-spacing: .06em; }
+.bar nav a { text-decoration: none; color: var(--muted); }
+.bar nav a:hover { color: var(--ink); }
+
+/* hero */
+.hero { position: relative; border-bottom: 1px solid var(--line);
+  background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 32px 32px; background-position: -1px -1px; }
+.hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, color-mix(in srgb, var(--paper) 55%, transparent), var(--paper) 96%); pointer-events: none; }
+.hero .wrap { position: relative; z-index: 1; }
+.hero .hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(24px, 4vw, 56px); align-items: center; padding-top: clamp(40px, 7vw, 84px); padding-bottom: 40px; }
+.eyebrow { font-family: var(--mono); font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin: 0 0 18px; }
+.hero h1 { font-size: clamp(52px, 7.4vw, 104px); line-height: .86; text-transform: uppercase; letter-spacing: -.005em; }
+.hero h1 .thin { font-weight: 500; color: var(--muted); }
+.thesis { font-size: clamp(18px, 2vw, 21px); line-height: 1.5; max-width: 34ch; margin: 22px 0 0; }
+.hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 18px; border: 1.5px solid var(--ink); font-family: var(--mono); font-size: 13.5px; text-transform: uppercase; letter-spacing: .05em; text-decoration: none; }
+.btn.primary { background: var(--ink); color: var(--paper); }
+.btn:hover { border-color: var(--accent); }
+.btn.primary:hover { background: var(--accent); color: #fff; }
+.hero-fig { position: relative; margin: 0; background: #fff; border: 1px solid var(--line); }
+.hero-fig video { width: 100%; aspect-ratio: 1100 / 668; object-fit: cover; }
+.callout { position: absolute; font-family: var(--mono); font-size: 11.5px; color: #15191e; background: #fff; border: 1px solid #15191e; padding: 3px 7px; text-transform: uppercase; letter-spacing: .05em; }
+.callout.c1 { top: 12px; left: 12px; }
+.callout.c2 { right: 12px; bottom: 12px; border-color: var(--accent); color: var(--accent); }
+
+/* title block */
+.titleblock { display: grid; grid-template-columns: repeat(5, 1fr); border: 1.5px solid var(--ink); margin: 0 0 44px; background: var(--panel); position: relative; z-index: 1; }
+.titleblock div { padding: 10px 14px; border-right: 1px solid var(--line); }
+.titleblock div:last-child { border-right: 0; }
+.titleblock dt { font-family: var(--mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+.titleblock dd { margin: 2px 0 0; font-family: var(--display); font-size: 22px; font-weight: 600; line-height: 1.15; }
+
+/* section heads */
+section { padding: clamp(56px, 8vw, 96px) 0 0; }
+.sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; border-bottom: 1.5px solid var(--ink); padding-bottom: 12px; margin-bottom: 8px; }
+.sec-head h2 { font-size: clamp(38px, 5vw, 56px); text-transform: uppercase; }
+.sec-head p { margin: 0; font-family: var(--mono); font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+
+/* index */
+.index { list-style: none; margin: 0; padding: 0; }
+.index a { display: grid; grid-template-columns: 82px 1fr auto 96px; gap: 16px; align-items: baseline; padding: 14px 4px; border-bottom: 1px solid var(--line); text-decoration: none; transition: background .15s, padding .15s; }
+.index a:hover { background: var(--panel); padding-left: 12px; }
+.index .no { font-family: var(--mono); font-size: 13px; color: var(--accent); }
+.index .t { font-family: var(--display); font-size: clamp(22px, 2.6vw, 28px); font-weight: 600; line-height: 1.1; }
+.index .k { font-family: var(--mono); font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; text-align: right; }
+.index .y { font-family: var(--mono); font-size: 13px; color: var(--muted); text-align: right; }
+
+/* project sheet */
+.sheet { padding-top: clamp(56px, 7vw, 88px); scroll-margin-top: 64px; }
+.sheet-head { display: grid; grid-template-columns: auto 1fr auto; gap: 8px 22px; align-items: end; border-bottom: 1.5px solid var(--ink); padding-bottom: 14px; }
+.sheet-no { font-family: var(--mono); font-size: 13px; color: var(--paper); background: var(--ink); padding: 5px 9px; align-self: start; margin-top: 6px; letter-spacing: .04em; }
+.sheet-head h3 { font-size: clamp(34px, 4.6vw, 54px); text-transform: uppercase; line-height: .95; }
+.sheet-head .meta { font-family: var(--mono); font-size: 12.5px; color: var(--muted); text-align: right; text-transform: uppercase; letter-spacing: .04em; line-height: 1.6; }
+.sheet-body { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(24px, 4vw, 52px); padding-top: 26px; }
+.lede { font-size: 18.5px; line-height: 1.55; margin: 0 0 22px; max-width: 46ch; }
+.label { font-family: var(--mono); font-size: 11.5px; text-transform: uppercase; letter-spacing: .09em; color: var(--muted); margin: 0 0 10px; display: flex; align-items: center; gap: 8px; }
+.label::before { content: ""; width: 14px; height: 2px; background: var(--accent); }
+.did { list-style: none; padding: 0; margin: 0 0 26px; display: grid; gap: 10px; }
+.did li { padding-left: 22px; position: relative; max-width: 58ch; }
+.did li::before { content: ""; position: absolute; left: 0; top: .62em; width: 10px; height: 10px; border: 2px solid var(--accent); transform: rotate(45deg) scale(.75); }
+.specs { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+.specs th, .specs td { text-align: left; padding: 8px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+.specs th { font-weight: 500; color: var(--muted); width: 48%; padding-right: 12px; font-size: 14px; }
+.specs td { font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: 14px; }
+.specs td b { color: var(--accent); font-weight: 500; }
+.note { font-size: 13.5px; color: var(--muted); margin: 12px 0 0; max-width: 60ch; }
+.stack { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px; }
+.chip { font-family: var(--mono); font-size: 12px; padding: 3px 8px; border: 1px solid var(--line); background: var(--panel); }
+
+.media { display: grid; gap: 14px; align-content: start; }
+.media.two { grid-template-columns: 1fr 1fr; }
+figure { margin: 0; }
+.frame { border: 1px solid var(--line); background: var(--panel); overflow: hidden; }
+.frame.white { background: #fff; }
+.frame.gray { background: #9c9c9c; }
+figcaption { font-family: var(--mono); font-size: 11.5px; color: var(--muted); padding: 7px 2px 0; letter-spacing: .02em; }
+figcaption b { color: var(--ink); font-weight: 500; }
+.span2 { grid-column: 1 / -1; }
+.sim { max-width: 440px; width: 100%; justify-self: center; }
+
+/* FYP pipeline */
+.pipe { border: 1px solid var(--line); background: var(--panel); padding: 20px; }
+.pipe ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; counter-reset: s; }
+.pipe li { display: grid; grid-template-columns: 34px 1fr auto; gap: 12px; align-items: center; padding: 12px 0; position: relative; counter-increment: s; }
+.pipe li + li { border-top: 1px dashed var(--line); }
+.pipe li::before { content: counter(s, decimal-leading-zero); font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.pipe .what { font-weight: 600; line-height: 1.3; }
+.pipe .how { display: block; font-weight: 400; font-size: 14px; color: var(--muted); }
+.tag { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; padding: 3px 8px; white-space: nowrap; }
+.tag.mine { background: var(--mine); color: #fff; }
+.tag.team { border: 1px solid var(--team); color: var(--team); }
+.tag.both { border: 1px solid var(--mine); color: var(--mine); }
+.legend { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 14px; font-size: 13px; color: var(--muted); align-items: center; }
+
+/* confusion matrix */
+.cm { display: grid; grid-template-columns: auto 1fr 1fr; gap: 3px; font-family: var(--mono); font-size: 13px; text-align: center; max-width: 360px; }
+.cm div { padding: 10px 6px; }
+.cm .h { color: var(--muted); font-size: 11.5px; text-transform: uppercase; letter-spacing: .04em; }
+.cm .ok { background: var(--accent); color: #fff; }
+.cm .bad { background: var(--accent-soft); }
+
+/* MPC diagram */
+.mpc svg { width: 100%; height: auto; }
+.mpc text { font-family: var(--mono); font-size: 12px; fill: var(--muted); }
+.mpc .lbl { fill: var(--ink); }
+
+/* experience */
+.jobs { display: grid; gap: 0; }
+.job { display: grid; grid-template-columns: 240px 1fr; gap: 24px; padding: 26px 0; border-bottom: 1px solid var(--line); }
+.job h3 { font-size: 28px; }
+.job .when { font-family: var(--mono); font-size: 13px; color: var(--muted); margin-top: 6px; }
+.job .org { font-family: var(--mono); font-size: 13px; color: var(--accent); text-transform: uppercase; letter-spacing: .05em; margin-top: 4px; }
+.job ul { margin: 0; padding-left: 18px; display: grid; gap: 8px; max-width: 70ch; }
+
+/* skills */
+.skills { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-left: 1px solid var(--line); border-top: 1px solid var(--line); margin-top: 18px; }
+.skill { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 18px 20px; }
+.skill h3 { font-size: 22px; text-transform: uppercase; margin-bottom: 8px; }
+.skill p { margin: 0; font-size: 15px; color: var(--muted); }
+
+/* contact */
+.contact { margin-top: clamp(56px, 8vw, 96px); background: var(--ink); color: var(--paper); }
+.contact .wrap { padding-top: 56px; padding-bottom: 56px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 32px; align-items: end; }
+.contact h2 { font-size: clamp(44px, 6.5vw, 84px); text-transform: uppercase; line-height: .9; }
+.contact h2 span { color: var(--accent); }
+.contact dl { margin: 0; display: grid; gap: 14px; }
+.contact dt { font-family: var(--mono); font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; opacity: .65; }
+.contact dd { margin: 2px 0 0; font-size: 18px; }
+.contact a { text-decoration-color: var(--accent); text-underline-offset: 4px; }
+.foot { font-family: var(--mono); font-size: 12px; color: var(--muted); padding: 18px 0 28px; }
+
+@media (max-width: 900px) {
+  .hero .hero-grid, .sheet-body, .contact .wrap { grid-template-columns: 1fr; }
+  .titleblock { grid-template-columns: repeat(2, 1fr); }
+  .titleblock div { border-bottom: 1px solid var(--line); }
+  .skills { grid-template-columns: 1fr 1fr; }
+  .job { grid-template-columns: 1fr; gap: 10px; }
+  .index a { grid-template-columns: 64px 1fr 72px; }
+  .index .k { display: none; }
+}
+@media (max-width: 560px) {
+  .bar nav { display: none; }
+  .sheet-head { grid-template-columns: auto 1fr; }
+  .sheet-head .meta { grid-column: 1 / -1; text-align: left; }
+  .skills { grid-template-columns: 1fr; }
+  .media.two { grid-template-columns: 1fr 1fr; }
+  .titleblock dd { font-size: 19px; }
+}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="mark" href="#top">K<span>/</span>K</a>
+    <nav aria-label="Sections">
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+<div class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">Mechatronics engineer · Robotics, control &amp; embedded systems</p>
+      <h1>Khalid<br><span class="thin">Kaddoura</span></h1>
+      <p class="thesis">I take machines from equations to hardware: modeling and control, computer vision on embedded boards, and the CAD that holds it all together.</p>
+      <div class="hero-cta">
+        <a class="btn primary" href="#projects">See the projects</a>
+        <a class="btn" href="#contact">Get in touch</a>
+      </div>
+    </div>
+    <figure class="hero-fig">
+      <video src="media/drone-exploded.mp4" autoplay muted loop playsinline poster="media/drone-render.jpg" aria-label="Exploded-view animation of the PX4 camera drone assembly in SolidWorks"></video>
+      <span class="callout c1">PX4 camera drone · SolidWorks</span>
+      <span class="callout c2">Exploded assembly</span>
+    </figure>
+  </div>
+  <div class="wrap">
+    <dl class="titleblock">
+      <div><dt>Degree</dt><dd>B.E. Mechatronics</dd></div>
+      <div><dt>University</dt><dd>LAU, Byblos</dd></div>
+      <div><dt>GPA</dt><dd>3.85 / 4.00</dd></div>
+      <div><dt>Certified</dt><dd>SolidWorks CSWA</dd></div>
+      <div><dt>Available</dt><dd>January 2027</dd></div>
+    </dl>
+  </div>
+</div>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head"><h2>Projects</h2><p>8 sheets</p></div>
+    <ol class="index">
+      <li><a href="#fyp"><span class="no">PRJ-01</span><span class="t">AI-Powered Assistive Feeder Robot</span><span class="k">In progress · CAD · Speech</span><span class="y">2026</span></a></li>
+      <li><a href="#furuta"><span class="no">PRJ-02</span><span class="t">Furuta Pendulum: Swing-Up &amp; LQR</span><span class="k">Nonlinear control</span><span class="y">2025</span></a></li>
+      <li><a href="#rover"><span class="no">PRJ-03</span><span class="t">Autonomous Garbage-Collecting Rover</span><span class="k">Vision · Fuzzy · Gestures</span><span class="y">2025</span></a></li>
+      <li><a href="#ecg"><span class="no">PRJ-04</span><span class="t">Hypoglycemia Detection from ECG</span><span class="k">Deep learning</span><span class="y">2025</span></a></li>
+      <li><a href="#conveyor"><span class="no">PRJ-05</span><span class="t">Waste-Sorting Conveyor Design</span><span class="k">Machine design</span><span class="y">2025</span></a></li>
+      <li><a href="#drone"><span class="no">PRJ-06</span><span class="t">PX4 Camera Drone</span><span class="k">CAD · FEA · Motion</span><span class="y">2024</span></a></li>
+      <li><a href="#dispenser"><span class="no">PRJ-07</span><span class="t">Automated Liquid Dispenser</span><span class="k">Arduino · Sensors</span><span class="y">2024</span></a></li>
+      <li><a href="#mpc"><span class="no">PRJ-08</span><span class="t">MPC vs. PID Literature Review</span><span class="k">Control theory</span><span class="y">2024</span></a></li>
+    </ol>
+  </div>
+
+  <!-- PRJ-01 -->
+  <article class="sheet wrap" id="fyp">
+    <header class="sheet-head">
+      <span class="sheet-no">PRJ-01</span>
+      <h3>AI-Powered Assistive Feeder Robot</h3>
+      <p class="meta">Final Year Project · Work in progress<br>Team · Expected Dec 2026</p>
+    </header>
+    <div class="sheet-body">
+      <div>
+        <p class="lede">Work in progress: a 3D-printable robotic arm that will feed people with limited upper-limb mobility. The user speaks a command, a depth camera finds the soft fruit, and the arm plans its way there.</p>
+        <p class="label">What I did</p>
+        <ul class="did">
+          <li>Designed the spring-loaded, two-part end effector in SolidWorks for 3D printing, building in an FSR 402 force-reading mechanism.</li>
+          <li>Responsible for actuation and sensing: ESP32 control of the MG996R and SG90 servos and the FSR 402 force readings.</li>
+          <li>Built the speech-control pipeline: WhisperX turns speech into text, and regular expressions pull out the robot command.</li>
+          <li>Developed the depth-camera soft-fruit detection with the team, passing target coordinates to ROS 2 MoveIt 2 for motion planning.</li>
+        </ul>
+        <div class="stack"><span class="chip">SolidWorks</span><span class="chip">WhisperX</span><span class="chip">Regex</span><span class="chip">Depth camera</span><span class="chip">ROS 2 · MoveIt 2</span><span class="chip">ESP32</span></div>
+      </div>
+      <div class="media">
+        <div class="pipe" role="figure" aria-label="Feeder robot pipeline showing which stages Khalid built">
+          <ol>
+            <li><span class="what">Voice command <span class="how">User speaks a request</span></span><span class="tag team">Input</span></li>
+            <li><span class="what">Speech to text <span class="how">WhisperX transcription</span></span><span class="tag mine">Mine</span></li>
+            <li><span class="what">Command extraction <span class="how">Regex parsing into robot actions</span></span><span class="tag mine">Mine</span></li>
+            <li><span class="what">Soft-fruit detection <span class="how">Depth camera → target coordinates</span></span><span class="tag both">With team</span></li>
+            <li><span class="what">Motion planning <span class="how">ROS 2 MoveIt 2</span></span><span class="tag team">Team</span></li>
+            <li><span class="what">Actuation &amp; sensing <span class="how">ESP32 driving MG996R and SG90 servos, FSR readings</span></span><span class="tag mine">Mine</span></li>
+            <li><span class="what">End effector <span class="how">Spring-loaded two-part gripper with FSR 402</span></span><span class="tag mine">Mine</span></li>
+          </ol>
+          <div class="legend"><span class="tag mine">Mine</span> I built it <span class="tag both">With team</span> shared work <span class="tag team">Team</span> teammates</div>
+        </div>
+        <p class="note">The project is not finished yet: FYP II is under way, and photos and a demo video will be added as the build progresses.</p>
+      </div>
+    </div>
+  </article>
+
+  <!-- PRJ-02 -->
+  <article class="sheet wrap" id="furuta">
+    <header class="sheet-head">
+      <span class="sheet-no">PRJ-02</span>
+      <h3>Furuta Pendulum: Swing-Up &amp; LQR</h3>
+      <p class="meta">Underactuated Robotics<br>2 people · Oct – Dec 2025</p>
+    </header>
+    <div class="sheet-body">
+      <div>
+        <p class="lede">A rotary inverted pendulum has one motor for two degrees of freedom. A hybrid controller pumps energy into the pendulum to swing it up, then hands over to an LQR that holds it upright.</p>
+        <p class="label">What I did</p>
+        <ul class="did">
+          <li>Derived the full nonlinear model with my teammate using the Euler–Lagrange method, writing it in manipulator form and using the cyclic coordinate to reduce its order.</li>
+          <li>Designed the energy-pumping swing-up law and the LQR stabilizer, with a switch between them near the upright position.</li>
+          <li>Proved stability with Lyapunov analysis for both phases and validated the whole system in MATLAB/Simulink and Simscape Multibody, including disturbance tests.</li>
+        </ul>
+        <p class="label">Key numbers</p>
+        <table class="specs">
+          <tr><th>LQR weights</th><td>Q = diag(300, 15, 3), R = 2</td></tr>
+          <tr><th>Optimal gain</th><td><b>K = [41.556 −2.739 4.124]</b></td></tr>
+          <tr><th>Swing-up law</th><td>u = k·ΔE·θ̇₂·cos θ₂</td></tr>
+          <tr><th>Arm / pendulum mass</th><td>0.12 kg / 0.15 kg</td></tr>
+        </table>
+        <div class="stack"><span class="chip">MATLAB</span><span class="chip">Simulink</span><span class="chip">Simscape Multibody</span><span class="chip">LQR</span><span class="chip">Lyapunov</span></div>
+      </div>
+      <div class="media two">
+        <figure class="span2 sim"><div class="frame" style="background:#000"><video src="media/furuta-full.mp4" autoplay muted loop playsinline aria-label="Full Simscape simulation: the pendulum swings up from hanging down, is stabilized upright by the LQR, then recovers from applied disturbances"></video></div><figcaption><b>Full run</b> · energy swing-up, switch to LQR, stabilization. Once upright, disturbances are applied to test whether the LQR can counteract them and bring the pendulum back.</figcaption></figure>
+        <figure><div class="frame white"><img src="media/furuta-render.jpg" alt="SolidWorks render of the Furuta pendulum on its stand"></div><figcaption><b>Model</b> · SolidWorks render</figcaption></figure>
+        <figure><div class="frame"><img src="media/furuta-states.jpg" alt="State trajectories of arm and pendulum angles during swing-up and stabilization"></div><figcaption><b>State trajectories</b></figcaption></figure>
+      </div>
+    </div>
+  </article>
+
+  <!-- PRJ-03 -->
+  <article class="sheet wrap" id="rover">
+    <header class="sheet-head">
+      <span class="sheet-no">PRJ-03</span>
+      <h3>Autonomous Garbage-Collecting Rover</h3>
+      <p class="meta">Mechatronics System Design II<br>Team of 3 · Mar – May 2025</p>
+    </header>
+    <div class="sheet-body">
+      <div>
+        <p class="lede">A rover that spots bottles and cans, steers itself to them with fuzzy logic, and carries a 6-DOF arm the operator drives with hand gestures.</p>
+        <p class="label">What I did</p>
+        <ul class="did">
+          <li>Deployed a YOLOv8 nano detector on a Raspberry Pi 5 with a Pi Camera V2 to find bottles and cans in real time.</li>
+          <li>Responsible for actuation and sensing: the DC drive motors through the L298N driver, the arm's servos on the ESP32, and the Pi Camera V2.</li>
+          <li>Implemented the Mamdani fuzzy controller that turns object offset and distance into left and right motor speeds, designed in MATLAB and ported to Python with scikit-fuzzy.</li>
+          <li>Developed the webcam gesture control: MediaPipe hand landmarks become a five-finger code, mapped to 13 arm commands and sent to the ESP32 over WebSocket.</li>
+        </ul>
+        <p class="label">Key numbers</p>
+        <table class="specs">
+          <tr><th>Training dataset</th><td>3,742 images, 2 classes</td></tr>
+          <tr><th>mAP@0.5</th><td><b>0.95</b></td></tr>
+          <tr><th>mAP@0.5:0.95</th><td>0.82</td></tr>
+          <tr><th>Correct class (bottle / can)</th><td>91% / 98%</td></tr>
+          <tr><th>Gesture commands</th><td>13, covering 6 joints</td></tr>
+        </table>
+        <div class="stack"><span class="chip">YOLOv8</span><span class="chip">Raspberry Pi 5</span><span class="chip">ESP32</span><span class="chip">Fuzzy logic</span><span class="chip">OpenCV · MediaPipe</span></div>
+      </div>
+      <div class="media two">
+        <figure><div class="frame"><video src="media/rover-arm.mp4" autoplay muted loop playsinline aria-label="The rover's arm reaching for a water bottle"></video></div><figcaption><b>Arm</b> · gesture-driven pick</figcaption></figure>
+        <figure><div class="frame"><video src="media/rover-auto.mp4" autoplay muted loop playsinline aria-label="Auto mode: detections on the laptop and the rover approaching a bottle"></video></div><figcaption><b>Auto mode</b> · detect and approach</figcaption></figure>
+        <figure class="span2"><div class="frame"><img src="media/rover-detect.jpg" alt="YOLOv8 detecting a water bottle on a desk with confidence 0.82"></div><figcaption><b>Detection</b> · YOLOv8 nano on a test image</figcaption></figure>
+      </div>
+    </div>
+  </article>
+
+  <!-- PRJ-04 -->
+  <article class="sheet wrap" id="ecg">
+    <header class="sheet-head">
+      <span class="sheet-no">PRJ-04</span>
+      <h3>Hypoglycemia Detection from ECG</h3>
+      <p class="meta">Deep Learning<br>Team of 3 · Oct – Dec 2025</p>
+    </header>
+    <div class="sheet-body">
+      <div>
+        <p class="lede">Can a 10-second ECG segment reveal low blood sugar? Only about 5% of segments were hypoglycemic, so the hard part was the imbalance.</p>
+        <p class="label">What I did</p>
+        <ul class="did">
+          <li>Designed and trained a 1D CNN + BiLSTM classifier on raw 2,500-sample ECG segments.</li>
+          <li>Trained a GAN to generate synthetic hypoglycemic segments, raising the positives from 1,723 to about 5,169.</li>
+          <li>Tested alternatives (a feature-based MLP, TimeGAN, patient-wise splits) and tuned the decision threshold for the best F1.</li>
+        </ul>
+        <p class="label">Key numbers</p>
+        <table class="specs">
+          <tr><th>F1 (hypoglycemia)</th><td><b>0.781</b></td></tr>
+          <tr><th>AUROC</th><td>0.981</td></tr>
+          <tr><th>Recall / precision</th><td>0.759 / 0.805</td></tr>
+          <tr><th>Model size</th><td>180,161 parameters</td></tr>
+        </table>
+        <p class="note">Results use a stratified random split. Patient-wise splits were tested but left too few positive events to learn from.</p>
+        <div class="stack"><span class="chip">Python</span><span class="chip">TensorFlow / Keras</span><span class="chip">CNN–BiLSTM</span><span class="chip">GAN</span></div>
+      </div>
+      <div class="media">
+        <figure><div class="frame white"><img src="media/dl-poster.jpg" alt="Project poster summarizing the dataset, method and results"></div><figcaption><b>Poster</b> · method and results</figcaption></figure>
+        <figure>
+          <div class="cm" role="table" aria-label="Confusion matrix on the test set">
+            <div class="h"></div><div class="h">Pred. normal</div><div class="h">Pred. hypo</div>
+            <div class="h">True normal</div><div class="ok">6,408</div><div class="bad">68</div>
+            <div class="h">True hypo</div><div class="bad">89</div><div class="ok">280</div>
+          </div>
+          <figcaption><b>Confusion matrix</b> · test set, threshold 0.85</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <!-- PRJ-05 -->
+  <article class="sheet wrap" id="conveyor">
+    <header class="sheet-head">
+      <span class="sheet-no">PRJ-05</span>
+      <h3>Waste-Sorting Conveyor Design</h3>
+      <p class="meta">Mechanical Engineering Design<br>2 people · Nov – Dec 2025</p>
+    </header>
+    <div class="sheet-body">
+      <div>
+        <p class="lede">A hopper-fed belt conveyor that carries mixed waste under a camera, where pushers divert ferrous metals, non-ferrous metals and plastics into three bins.</p>
+        <p class="label">What I did</p>
+        <ul class="did">
+          <li>Designed the full assembly in SolidWorks: hopper, frame, belt, rollers, shafts, legs and drive.</li>
+          <li>Sized belt speed, motor speed and bearings, then checked the shafts for fatigue with Goodman and Langer criteria.</li>
+          <li>Verified the legs against buckling and stress (FEA), and the frame bolts against shear.</li>
+        </ul>
+        <p class="label">Key numbers</p>
+        <table class="specs">
+          <tr><th>Belt speed / drive speed</th><td>0.2 m/s / 636.6 rpm</td></tr>
+          <tr><th>Shaft (AISI 1045, Ø6 mm)</th><td><b>n = 1.57</b> Goodman, infinite life</td></tr>
+          <tr><th>Bearing load rating</th><td>C₁₀ = 132 N for 19,000 h</td></tr>
+          <tr><th>M4 frame bolts</th><td>n = 9.36 in shear</td></tr>
+          <tr><th>Hopper volume</th><td>0.25 m³</td></tr>
+        </table>
+        <div class="stack"><span class="chip">SolidWorks</span><span class="chip">FEA</span><span class="chip">Shigley methods</span></div>
+      </div>
+      <div class="media two">
+        <figure class="span2"><div class="frame white"><img src="media/conveyor-render.jpg" alt="SolidWorks model of the hopper, conveyor belt and three sorting bins" style="max-height:440px;margin:0 auto"></div><figcaption><b>Assembly</b> · hopper, belt, pushers and bins</figcaption></figure>
+        <figure><div class="frame white"><img src="media/conveyor-detail.jpg" alt="Close-up of belt, pushers and bins"></div><figcaption><b>Sorting end</b></figcaption></figure>
+        <figure><div class="frame white"><img src="media/conveyor-stress.jpg" alt="Von Mises stress plot of the conveyor legs"></div><figcaption><b>Leg stress</b> · von Mises, max ≈ 2 MPa</figcaption></figure>
+      </div>
+    </div>
+  </article>
+
+  <!-- PRJ-06 -->
+  <article class="sheet wrap" id="drone">
+    <header class="sheet-head">
+      <span class="sheet-no">PRJ-06</span>
+      <h3>PX4 Camera Drone</h3>
+      <p class="meta">Computer-Aided Design<br>2 people · Oct – Dec 2024</p>
+    </header>
+    <div class="sheet-body">
+      <div>
+        <p class="lede">A full quadcopter assembly with a gimbal camera, GPS mast, LiDAR and tracking camera, taken through motion, stress and sustainability studies.</p>
+        <p class="label">What I did</p>
+        <ul class="did">
+          <li>Modeled my half of the parts: battery frame, flight-controller frame, companion computer, GPS mount and mast, landing legs, LiDAR and its mount, T265 frame, motor covers, and the camera sphere and base arm.</li>
+          <li>Built the full drone and gimbal-camera assemblies with my partner, with renders and an exploded-view animation.</li>
+          <li>Ran motion, stress and sustainability studies on the design, setting propeller speed from the thrust each motor needs to lift off.</li>
+        </ul>
+        <p class="label">Key numbers</p>
+        <table class="specs">
+          <tr><th>Assembly mass</th><td>1,255 g</td></tr>
+          <tr><th>Thrust in motion study</th><td>5 N per motor (3.08 N to hover)</td></tr>
+          <tr><th>Propeller speed</th><td>≈ 16,530 rpm</td></tr>
+          <tr><th>V-bracket FEA</th><td><b>min FoS 3.87</b>, 64.2 MPa peak</td></tr>
+        </table>
+        <div class="stack"><span class="chip">SolidWorks</span><span class="chip">Motion Analysis</span><span class="chip">Simulation</span><span class="chip">Sustainability</span><span class="chip">Visualize</span></div>
+      </div>
+      <div class="media two">
+        <figure class="span2"><div class="frame"><img src="media/drone-render.jpg" alt="Rendered PX4 drone on a dark plinth"></div><figcaption><b>Render</b> · full assembly</figcaption></figure>
+        <figure><div class="frame white"><img src="media/drone-camera.jpg" alt="Rendered gimbal camera assembly"></div><figcaption><b>Camera assembly</b></figcaption></figure>
+        <figure><div class="frame white"><video src="media/drone-takeoff.mp4" autoplay muted loop playsinline aria-label="Motion study of the drone taking off"></video></div><figcaption><b>Take-off</b> · motion study</figcaption></figure>
+      </div>
+    </div>
+  </article>
+
+  <!-- PRJ-07 -->
+  <article class="sheet wrap" id="dispenser">
+    <header class="sheet-head">
+      <span class="sheet-no">PRJ-07</span>
+      <h3>Automated Liquid Dispenser</h3>
+      <p class="meta">Mechatronics System Design I<br>Team of 3 · Oct – Dec 2024</p>
+    </header>
+    <div class="sheet-body">
+      <div>
+        <p class="lede">Pick a cup size and a drink; a conveyor carries the cup to the right pump, fills it and buzzes when it is done.</p>
+        <p class="label">What I did</p>
+        <ul class="did">
+          <li>Responsible for embedding the sensors and actuators on the Arduino Mega 2560.</li>
+          <li>Integrated the ultrasonic sensor that stops the cup under the right nozzle (23 cm for drink 1, 13 cm for drink 2).</li>
+          <li>Wired the two pumps through a relay module, the 12 V belt motor through an L298N driver, plus the waterproof temperature probe, LCD, buttons, LEDs and buzzer.</li>
+        </ul>
+        <p class="label">Hardware</p>
+        <table class="specs">
+          <tr><th>Controller</th><td>Arduino Mega 2560</td></tr>
+          <tr><th>Belt drive</th><td>12 V DC, 60 rpm, 1 N·m</td></tr>
+          <tr><th>Pumps</th><td>2 × 5 V submersible, 80–120 L/h</td></tr>
+          <tr><th>Sensing</th><td>Ultrasonic sensor, DS18B20 probe</td></tr>
+        </table>
+        <div class="stack"><span class="chip">Arduino</span><span class="chip">C++</span><span class="chip">Relays</span><span class="chip">L298N</span></div>
+      </div>
+      <div class="media two">
+        <figure><div class="frame"><video src="media/dispenser.mp4" autoplay muted loop playsinline aria-label="The dispenser moving a cup and filling it"></video></div><figcaption><b>In action</b> · cup positioning and filling</figcaption></figure>
+        <figure><div class="frame"><img src="media/dispenser-proto.jpg" alt="Assembled dispenser prototype with frame, belt and button panel"></div><figcaption><b>Prototype</b> · fully assembled</figcaption></figure>
+      </div>
+    </div>
+  </article>
+
+  <!-- PRJ-08 -->
+  <article class="sheet wrap" id="mpc">
+    <header class="sheet-head">
+      <span class="sheet-no">PRJ-08</span>
+      <h3>MPC vs. PID Literature Review</h3>
+      <p class="meta">Control Systems<br>Dec 2024</p>
+    </header>
+    <div class="sheet-body">
+      <div>
+        <p class="lede">How does Model Predictive Control compare to PID in performance, flexibility and real-world use, and what does it take to implement it well?</p>
+        <p class="label">What I covered</p>
+        <ul class="did">
+          <li>How MPC works: a system model, an optimization over prediction and control horizons, and receding-horizon feedback.</li>
+          <li>Where it beats PID (constraints, multivariable coupling, prediction) and what it costs in computation and tuning.</li>
+          <li>Nonlinear MPC, power-electronics applications, and a wind-turbine case study under actuator faults.</li>
+        </ul>
+        <p class="note">Also in 2024: a full-stack hotel booking app built with a team in React Native, Node.js and MongoDB.</p>
+      </div>
+      <div class="media mpc">
+        <div class="frame" style="padding:18px">
+          <svg viewBox="0 0 560 250" role="img" aria-label="Receding-horizon diagram: past outputs, current time k, predicted outputs tracking the reference over the prediction horizon, and planned inputs over the control horizon">
+            <line x1="40" y1="200" x2="540" y2="200" stroke="currentColor" style="color:var(--line)"/>
+            <line x1="240" y1="20" x2="240" y2="215" stroke="var(--ink)" stroke-dasharray="4 4"/>
+            <text x="244" y="230" class="lbl">k (now)</text>
+            <line x1="40" y1="60" x2="540" y2="60" stroke="var(--muted)" stroke-dasharray="2 5"/>
+            <text x="44" y="52">reference r</text>
+            <polyline fill="none" stroke="var(--ink)" stroke-width="2" points="40,170 80,160 120,140 160,128 200,112 240,104"/>
+            <text x="44" y="150" class="lbl">past output</text>
+            <polyline fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="7 4" points="240,104 290,86 340,74 390,67 440,63 490,61 540,60"/>
+            <text x="350" y="100" style="fill:var(--accent)">predicted y</text>
+            <g fill="var(--accent)" opacity=".35">
+              <rect x="240" y="150" width="40" height="50"/><rect x="280" y="160" width="40" height="40"/><rect x="320" y="170" width="40" height="30"/><rect x="360" y="176" width="40" height="24"/>
+            </g>
+            <text x="244" y="144">planned inputs u</text>
+            <line x1="240" y1="240" x2="400" y2="240" stroke="var(--ink)"/><text x="404" y="244">Nu</text>
+            <line x1="240" y1="22" x2="540" y2="22" stroke="var(--ink)"/><text x="470" y="16">N2</text>
+          </svg>
+        </div>
+        <figcaption><b>Receding horizon</b> · only the first planned input is applied, then the problem is solved again</figcaption>
+      </div>
+    </div>
+  </article>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head"><h2>Experience</h2><p>Industry</p></div>
+    <div class="jobs">
+      <div class="job">
+        <div><h3>Engineering Intern</h3><div class="org">Jubaili Bros S.A.L.</div><div class="when">Summer 2026 · 8-week rotation</div></div>
+        <ul>
+          <li>Rotated through six departments (solutions, panel assembly, assembly line, design, fabrication and after-sales) across the diesel generating-set life cycle.</li>
+          <li>Wired and assembled generator control panels from schematics: DIN-rail devices, Deep Sea controllers, control and power terminations, earth-continuity checks.</li>
+          <li>Traced excessive vibration on a finished set to a tight power cable bridging the anti-vibration mounts with point-by-point vibration readings; re-routing it restored normal levels.</li>
+          <li>Calibrated a capacitive fuel-level sensor, sized conductors with derating and voltage-drop checks, and joined functional testing, on-site shutdown diagnosis and solar/battery-storage work.</li>
+        </ul>
+      </div>
+      <div class="job">
+        <div><h3>Engineering Intern</h3><div class="org">A To Z Medical, Saida</div><div class="when">Jun – Aug 2024 · Part-time</div></div>
+        <ul>
+          <li>Performed planned preventive maintenance and calibration on laboratory and operating-room equipment to manufacturer procedures.</li>
+          <li>Troubleshot and serviced chemistry and hematology analyzers alongside field engineers.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head"><h2>Toolkit</h2><p>Skills</p></div>
+    <div class="skills">
+      <div class="skill"><h3>Control</h3><p>LQR, energy shaping, Lyapunov analysis, fuzzy logic, MATLAB/Simulink, Simscape</p></div>
+      <div class="skill"><h3>Robotics &amp; AI</h3><p>ROS 2 / MoveIt 2, YOLOv8, CNN / LSTM models, GANs, OpenCV, WhisperX</p></div>
+      <div class="skill"><h3>Mechanical</h3><p>SolidWorks (CSWA), FEA, motion studies, shaft, bearing and fastener design</p></div>
+      <div class="skill"><h3>Embedded</h3><p>ESP32, Arduino, Raspberry Pi, sensors and actuators, motor drivers</p></div>
+      <div class="skill"><h3>Programming</h3><p>Python, C/C++, Java, Assembly, Ladder Logic</p></div>
+      <div class="skill"><h3>Industrial</h3><p>Control-panel wiring, Deep Sea controllers, sensor calibration, vibration measurement, conductor sizing</p></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="contact" id="contact">
+  <div class="wrap">
+    <h2>Let's build<br>something <span>that moves.</span></h2>
+    <dl>
+      <div><dt>Email</dt><dd><a href="mailto:khalid.kaddoura.01@gmail.com">khalid.kaddoura.01@gmail.com</a></dd></div>
+      <div><dt>Phone</dt><dd>+961 81 473 743</dd></div>
+      <div><dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/khalid-kaddoura">linkedin.com/in/khalid-kaddoura</a></dd></div>
+      <div><dt>Languages</dt><dd>Arabic (C2, native) · English (C1)</dd></div>
+    </dl>
+  </div>
+</footer>
+<div class="wrap foot">Khalid Kaddoura · Mechatronics Engineering, Lebanese American University</div>
+
+<script>
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var vids = document.querySelectorAll('video');
+  if (reduce) { vids.forEach(function (v) { v.removeAttribute('autoplay'); v.pause(); v.controls = true; }); return; }
+  if (!('IntersectionObserver' in window)) return;
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { var v = e.target; if (e.isIntersecting) { var p = v.play(); if (p && p.catch) p.catch(function () {}); } else { v.pause(); } });
+  }, { rootMargin: '120px' });
+  vids.forEach(function (v) { io.observe(v); });
+})();
+</script>
+</body>
+</html>
